@@ -391,7 +391,7 @@ impl<Call: VntCallback, Device: DeviceWrite> ServerPacketHandler<Call, Device> {
                                     ));
                                 } else {
                                     let device =
-                                        unsafe { tun_rs::SyncDevice::from_fd(device_fd as _) };
+                                        unsafe { tun_rs::SyncDevice::from_fd(device_fd as _).expect("from_fd failed") };
                                     if let Err(e) = self
                                         .tun_device_helper
                                         .start(Arc::new(device), self.config_info.allow_wire_guard)
